@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReferenceCannulaKinematicsAtS", "ReferenceCannulaKinematics.vcxproj", "{F6B1948A-5844-43CC-8B68-399A66A2DBDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		RelWithDeb|x64 = RelWithDeb|x64
+		RelWithDeb|x86 = RelWithDeb|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Debug|x64.ActiveCfg = Debug|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Debug|x64.Build.0 = Debug|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Debug|x86.ActiveCfg = Debug|Win32
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Debug|x86.Build.0 = Debug|Win32
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Release|x64.ActiveCfg = Release|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Release|x64.Build.0 = Release|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Release|x86.ActiveCfg = Release|Win32
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.Release|x86.Build.0 = Release|Win32
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.RelWithDeb|x64.ActiveCfg = RelWithDeb|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.RelWithDeb|x64.Build.0 = RelWithDeb|x64
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.RelWithDeb|x86.ActiveCfg = RelWithDeb|Win32
+		{F6B1948A-5844-43CC-8B68-399A66A2DBDC}.RelWithDeb|x86.Build.0 = RelWithDeb|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

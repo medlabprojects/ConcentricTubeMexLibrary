@@ -1,0 +1,50 @@
+﻿  ReferenceCannulaKinematics.cpp
+c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\referencecannulakinematics.cpp(3064): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\referencecannulakinematics.cpp(3076): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(959): warning C4996: 'std::transform::_Unchecked_iterators::_Deprecate': Call to 'std::transform' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(959): note: see declaration of 'std::transform::_Unchecked_iterators::_Deprecate'
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\rungekutta.h(160): note: see reference to function template instantiation '_OutIt *std::transform<_Ty*,_Ty*,Mathematics::internal::rk8_step_obj<CTR::internal::xi_bind<Cannula>>::()::<lambda_d3d15f91b2408a411624b6ca773b024c>>(_InIt,_InIt,_OutIt,_Fn1)' being compiled
+          with
+          [
+              _OutIt=double *,
+              _Ty=double,
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>,
+              _InIt=double *,
+              _Fn1=Mathematics::internal::rk8_step_obj<CTR::internal::xi_bind<std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>>>::()::<lambda_d3d15f91b2408a411624b6ca773b024c>
+          ]
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\rungekutta.h(638): note: see reference to function template instantiation 'Mathematics::StateTime<State> Mathematics::internal::rk8_step_obj<CTR::internal::xi_bind<Cannula>>::operator ()<State>(const Mathematics::StateTime<State> &,double) const' being compiled
+          with
+          [
+              State=CTR::State<3,OType>,
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>
+          ]
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\rungekutta.h(638): note: see reference to function template instantiation 'Mathematics::StateTime<State> Mathematics::internal::rk8_step_obj<CTR::internal::xi_bind<Cannula>>::operator ()<State>(const Mathematics::StateTime<State> &,double) const' being compiled
+          with
+          [
+              State=CTR::State<3,OType>,
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>
+          ]
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\kinematics.h(732): note: see reference to function template instantiation 'State Mathematics::rk8_final<State,CTR::internal::xi_bind<Cannula>,boost::intrusive::reverse_iterator<boost::container::container_detail::vec_iterator<double *,false>>,CTR::internal::state_callback>(const Functor &,const State &,Iter,const Iter &,const Callback &)' being compiled
+          with
+          [
+              State=CTR::State<3,OType>,
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>,
+              Functor=CTR::internal::xi_bind<std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>>,
+              Iter=boost::intrusive::reverse_iterator<boost::container::container_detail::vec_iterator<double *,false>>,
+              Callback=CTR::internal::state_callback
+          ]
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\kinematics.h(909): note: see reference to function template instantiation 'State CTR::internal::integrate_impl<CTR::State<3,OType>,Cannula>(const Cannula &,const State &,const TInterval::IntervalList &,const CTR::DiscontinuityList &,int,double,int *)' being compiled
+          with
+          [
+              State=CTR::State<3,OType>,
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>
+          ]
+  c:\users\fergujm2\documents\my documents\mirror (local)\projects\lab projects\endonasal surgical system\cannula kinematics copy\referencekinematics\referencecannulakinematics\referencecannulakinematics.cpp(441): note: see reference to function template instantiation 'CTR::KinRet<CTR::State<3,OType>> CTR::Kinematics<std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>,test_kinematics_geom_only::Configuration,OType>(const Cannula &,const Configuration &,const Options,int,double)' being compiled
+          with
+          [
+              Cannula=std::tuple<CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>,CTR::Tube<CTR::Functions::constant_fun<Eigen::Vector2d>,CTR::Functions::constant_fun<double>,CTR::Functions::constant_fun<double>>>,
+              Configuration=test_kinematics_geom_only::Configuration,
+              Options=OType
+          ]
+  ReferenceCannulaKinematics.vcxproj -> C:\Users\fergujm2\Documents\My Documents\Mirror (Local)\Projects\Lab Projects\Endonasal Surgical System\Cannula Kinematics Copy\ReferenceKinematics\x64\Debug\ReferenceCannulaKinematics.exe
+  ReferenceCannulaKinematics.vcxproj -> C:\Users\fergujm2\Documents\My Documents\Mirror (Local)\Projects\Lab Projects\Endonasal Surgical System\Cannula Kinematics Copy\ReferenceKinematics\x64\Debug\ReferenceCannulaKinematics.pdb (Full PDB)

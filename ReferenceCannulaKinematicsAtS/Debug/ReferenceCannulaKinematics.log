@@ -1,0 +1,3 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ReferenceCannulaKinematics.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  ReferenceCannulaKinematics.vcxproj -> C:\Users\fergujm2\Documents\My Documents\Mirror (Local)\Projects\Endonasal\Cannula Kinematics Copy\ReferenceKinematics\ReferenceCannulaKinematicsAtS\Debug\ReferenceCannulaKinematicsAtS.exe
+  ReferenceCannulaKinematics.vcxproj -> C:\Users\fergujm2\Documents\My Documents\Mirror (Local)\Projects\Endonasal\Cannula Kinematics Copy\ReferenceKinematics\ReferenceCannulaKinematicsAtS\Debug\ReferenceCannulaKinematicsAtS.pdb (Full PDB)
