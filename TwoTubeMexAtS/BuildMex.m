@@ -6,13 +6,13 @@
 
 %The Eigen library location, so that the
 % compiler can find the include <Eigen/Dense>
-% EIGEN_LOCATION='E:\Libraries\include';
-EIGEN_LOCATION='C:\Libraries\C++\Eigen';
+EIGEN_LOCATION='/Users/jessedalmeida/CppLibraries/include/Eigen';
+% EIGEN_LOCATION='C:\Libraries\C++\Eigen';
 
 
 %The Boost library location
-% BOOST_LOCATION='E:\Libraries\include'; 
-BOOST_LOCATION='C:\Libraries\C++\boost_1_64_0';
+BOOST_LOCATION='/Users/jessedalmeida/CppLibraries/include/boost'; 
+% BOOST_LOCATION='C:\Libraries\C++\boost_1_64_0';
 
 
 % Shouldn't need to change anything below here
