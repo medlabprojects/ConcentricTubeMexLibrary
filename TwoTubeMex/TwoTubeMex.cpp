@@ -34,10 +34,15 @@ void printHelp()
                           "      T2:   Tube structure for tube 2 (see definition below)\n"
                           "      psiL: The distal tip angles\n"
                           "      Beta: The tube translations\n"
+                          "      n:    (optional) number of sampled points\n"
                           "   Outputs: \n"
-                          "      p_tip: The tip position\n"
-                          "      q_tip: The tip orientation\n"
-                          "      J_tip: The jacobian matrix of p_tip and q_tip with respect to psiL and Beta\n"
+                          "      p_tip: [3x1] tip position\n"
+                          "      q_tip: [4x1] quaternion of tip orientation\n"
+                          "      J_tip: [6x4] Jacobian matrix of p_tip and q_tip with respect to psiL and Beta\n"
+                          "      s:     [nx1] arclengths of sampled points\n"
+                          "      p:     [nx3] positions of sampled points\n"
+                          "      q:     [nx4] quaternion orientation of sampled points\n"
+                          "      J:     [nx1 cells] jacobian of sampled points\n"
                           "\n"
                           "   Tube structure definition: \n"
                           "      OD: Outer diameter\n"
@@ -183,7 +188,7 @@ void copy_outputs_to_matlab( KinRetDense<State<2,OType> > const &ret1, mxArray *
 
 	//handle the Jacobian states a little differently, as 
 	// a struct array
-	size_t dimsJJ[1] = { Npts };
+	size_t dimsJJ[1] = {static_cast<size_t>(Npts) };
 	mxArray *JJ = mxCreateCellArray(1, dimsJJ);
 	Eigen::Matrix<double,6,6> Ad_beta = Utility::Adjoint_p_q(ret1.y_final.p, ret1.y_final.q);
 	Eigen::Matrix<double,6,4>	const &Zga_beta = ret1.y_final.Zga;

@@ -37,7 +37,7 @@ Alpha: rotation at the base of the tubes
 
 (Psi: rotation from torsion at each section)
 
-Beta: distance between base of tube and the imaginary front plate (must be negative)
+Beta: distance between base of tube and the imaginary front plate (**must be negative**)
 
 
 
@@ -50,6 +50,7 @@ s     [Nx1] - sampled backbone positions
 p     [Nx3] - positions of each link
 q     [Nx4] - orientations of each link
 J     [Nx1] - cell containing 6x4 jacobians 
+n (optional)- number of sampled points
 ```
 
 Note: WithPsi will also contain the field
