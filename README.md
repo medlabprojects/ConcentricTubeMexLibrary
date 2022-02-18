@@ -12,8 +12,76 @@ With Psi (e.g. ThreeTubeWithPsi) takes into account torsion that would occur alo
 Each folder has a test file that gives a simple robot configuration and plots to test if the mex built correctly. 
 
 
-##### Note: this is code written by Hunter years ago, found on Margaret's network drive, then adapted and uploaded by Jesse to this repo
+### Note: this is code written by Hunter years ago, found on Margaret's network drive, then adapted and uploaded by Jesse to this repo
 Some things might need tweaking later down the line but the main cpp functions are not changed. 
+
+## How to use?
+Each folder should have a test that makes a robot and runs the kinematic code, this is a good example to follow. 
+In general, each will take in the same general set up. Let's use TwoTubeMex as an example. 
+We use an object called a struct to hold the information for the robot; its similar to a class but without any methods. 
+The mex function will take for the first n inputs (where n is the number of tubes), a struct with the information for each tube. 
+The tube structure is the following:
+```
+OD: Outer diameter
+ID: Inner diameter
+k:  Tube precurvature
+L:  Total tube length
+Lt: Transmission length
+E:  Young's Modulus
+G:  Shear Modulus
+```
+
+The next two inputs are arrays with the base rotation (alpha or psi) and base translation (beta) for each tube.
+ 
+Alpha: rotation at the base of the tubes
+
+(Psi: rotation from torsion at each section)
+
+Beta: distance between base of tube and the imaginary front plate (must be negative)
+
+
+
+The output will be another struct with the following fields:
+```
+p_tip [3x1] - position of tip in base frame
+q_tip [4x1] - quaternion orientation of tip in base frame
+J_tip [6xnTubes] - jacobian of tip in base frame
+s     [Nx1] - sampled backbone positions
+p     [Nx3] - positions of each link
+q     [Nx4] - orientations of each link
+J     [Nx1] - cell containing 6x4 jacobians 
+```
+
+Note: WithPsi will also contain the field
+```
+psi [Nx3]   - psi values at each link
+```
+
+
+Here is an example: 
+```
+tube1.OD = 1.0e-3;
+tube1.ID = 0.6e-3;
+tube1.k = 10;
+tube1.Lt = 150e-3;
+tube1.L = tube1.L + 33e-3;
+
+tube1.E = 60e9;
+tube1.G = tube1.E/2/(1.4);
+
+tube2.OD = 1.0e-3;
+tube2.ID = 0.6e-3;
+tube2.k = 10;
+tube2.Lt = 100e-3;
+tube2.L = tube2.Lt + 60e-3;
+tube2.E = 60e9;
+tube2.G = tube2.E/2/(1.4);
+
+alpha = [.2*pi, .3*pi];
+beta = [-15e-3, -7e-3];
+kin = TWoTubeMex(tube1, tube2, alpha, beta);
+```
+
 
 
 ## Mex files

@@ -197,7 +197,7 @@ void copy_outputs_to_matlab( KinRetDense<State<3,OType> > const &ret1, mxArray *
 
 	//handle the Jacobian states a little differently, as 
 	// a struct array
-	const size_t dimsJJ[1] = { Npts };
+	const size_t dimsJJ[1] = { static_cast<size_t>(Npts) };
 	mxArray *JJ = mxCreateCellArray(1, dimsJJ);
 	Eigen::Matrix<double,6,6> Ad_beta = Utility::Adjoint_p_q(ret1.y_final.p, ret1.y_final.q);
 	Eigen::Matrix<double,6,6>	const &Zga_beta = ret1.y_final.Zga;

@@ -58,7 +58,7 @@ time = 0;
 for i=1:1
 psiL = [2*pi*i/100,6*pi*i/100];
 tic;
-[R] = TwoTubeMex(tube1, tube2, psiL, beta, 20);
+[R] = TwoTubeMex(tube1, tube2, psiL, beta);
 time = time + toc;
 s_max = max(R.s);
 s_min = min(R.s);

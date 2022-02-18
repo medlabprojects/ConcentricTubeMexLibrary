@@ -28,7 +28,7 @@ typedef DeclareOptions< Option::ComputeJacobian, Option::ComputeGeometry >::opti
 
 void printHelp()
 {
-   const char * helpMsg = "function [] = ThreeTubeMex(T1,T2,psiL,Beta)   \n"
+   const char * helpMsg = "function [] = TwoTubeMex(T1,T2,psiL,Beta)   \n"
                           "   Inputs:\n"
                           "      T1:   Tube structure for tube 1 (see definition below)\n"
                           "      T2:   Tube structure for tube 2 (see definition below)\n"

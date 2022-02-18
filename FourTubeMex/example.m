@@ -9,7 +9,7 @@ t = linspace(0,4,60)'; %time vector for plotting
 NInterp = 50; %number of arc length points
 NTheta = 10; %number of points on circle around each arc length
 
-for i=1:length(theta1);
+for i=1:length(theta1)
     
     psiL = [0  *deg2rad(theta1(i)),...
             1  *deg2rad(theta1(i)),...
