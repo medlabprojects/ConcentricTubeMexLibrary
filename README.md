@@ -5,9 +5,16 @@ This so far only supports robots with two through four tubes. For each of these,
 at S, and with Psi. 
 
 The general case is (e.g. ThreeTube) solve for the kinematics directly given a rotation and translation at the base. 
-At S (e.g. ThreeTubeAtS) ...
+
+AtS (e.g. ThreeTubeAtS) something where arclength is evaluated at specified point(s). 
+
 With Psi (e.g. ThreeTubeWithPsi) takes into account torsion that would occur along the straight sections of the tubes. 
 Each folder has a test file that gives a simple robot configuration and plots to test if the mex built correctly. 
+
+
+##### Note: this is code written by Hunter years ago, found on Margaret's network drive, then adapted and uploaded by Jesse to this repo
+Some things might need tweaking later down the line but the main cpp functions are not changed. 
+
 
 ## Mex files
 
@@ -49,7 +56,9 @@ they change things slightly and there might be some syntax errors. It'll usually
 ```
  TwoTubeMexWithPsi/TwoTubeMexWithPsi.cpp ...
 ```
-This next line points to the make cpp file that you want to turn into a mex. **CHANGE THIS TO THE FILE YOU WANT TO COMPILE**
+This next line points to the make cpp file that you want to turn into a mex. 
+
+--CHANGE THIS TO THE FILE YOU WANT TO COMPILE--
 
 ```
 ReferenceCannulaKinematics/Rk8_Coeffs.cpp...
@@ -63,11 +72,14 @@ These I'm not sure just leave as is.
 -I/Users/jessedalmeida/CppLibraries/include/boost
 ```
 These point those dependencies I talked about earlier. ReferenceCannulaKinematics won't have to change since it should be in this same folder.
+However, if you're doing an '__TubeMexAtS' file then you need to change this reference to be 'ReferenceCannulaKinematicsAtS' instead. 
 **The last two should be the absolute path to where you saved the Eigen and Boost libraries**
 
 Once you make these changes, run it and you should see a new mex file pop up!
 
-
+## Notes
+There will be a couple of warnings when you build the mex file. That's ok don't worry. 
+Or maybe try to fix them if you're feeling ~spicy~ helpful. 
 
 ## Common Errors
 ### No C++ complier

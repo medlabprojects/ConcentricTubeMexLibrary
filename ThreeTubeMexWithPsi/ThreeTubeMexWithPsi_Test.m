@@ -27,7 +27,7 @@ beta = [-100e-3,-60e-3,-25e-3];
 
 tic;
 [R] = ThreeTubeMexWithPsi(tube1, tube2, tube3, psiL, beta, 20);
-time = time + toc;
+t = toc;
 s_max = max(R.s);
 s_min = min(R.s);
 s_interp = linspace(s_min, s_max, 100);
@@ -37,9 +37,10 @@ daspect([1 1 1]);
 xlim([-25 25]*1e-3)
 ylim([-25 25]*1e-3)
 zlim([-50 50]*1e-3)
-view(az,el)
+grid on; axis equal;
 drawnow
 
 
-disp(['Kinematics time: ' num2str(time)])
+
+disp(['Kinematics time: ' num2str(t)])
 
