@@ -123,7 +123,7 @@ they change things slightly and there might be some syntax errors. It'll usually
 "-fno-omit-frame-pointer" I'm not really sure but it seems important 
 
 ```
- TwoTubeMexWithPsi/TwoTubeMexWithPsi.cpp ...
+ TwoTubeMex/WithPsi/TwoTubeMexWithPsi.cpp ...
 ```
 This next line points to the make cpp file that you want to turn into a mex. 
 

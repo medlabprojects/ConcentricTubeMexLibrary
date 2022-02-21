@@ -20,6 +20,9 @@ tube2.G = tube2.E/2/(1.4);
 
 
 beta = [-100e-3,-60e-3];
+psiL = [2*pi*i/100,6*pi*i/100];
+
+%%
 [az,el]=view
 time = 0;
 for i=1:1
@@ -41,4 +44,23 @@ drawnow
 end
 
 disp(['Kinematics time: ' num2str(time)])
+
+%%
+robot.tube1 = tube1;
+robot.tube2 = tube2;
+q = [psiL, beta];
+
+[p_tip,s,pStar,qStar,Jh,JStar, kin] = fwkin(robot, q);
+
+s_max = max(s);
+s_min = min(s);
+s_interp = linspace(s_min, s_max, 100);
+p_interp = interp1(flipud(s), flipud(kin.p), s_interp,'pchip');
+plot3(p_interp(:,1), p_interp(:,2), p_interp(:,3))
+daspect([1 1 1]);
+xlim([-25 25]*1e-3)
+ylim([-25 25]*1e-3)
+zlim([-50 50]*1e-3)
+view(az,el)
+drawnow
 

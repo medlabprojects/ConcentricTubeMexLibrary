@@ -1,6 +1,3 @@
-
-
-
 tube1.OD = 1.0e-3;
 tube1.ID = 0.6e-3;
 tube1.k = 10;
