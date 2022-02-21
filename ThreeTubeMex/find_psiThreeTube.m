@@ -6,7 +6,7 @@ function psiL = find_psiThreeTube(robot,alpha,beta)
     end
     
 function e = base_angle_err3(psiL,alpha,beta,robot)
-    kinRet = ThreeTubeMexWithPsi(robot.tube1,robot.tube2,robot.tube3,psiL,beta);
+    kinRet = ThreeTubeMexWithPsi(robot.tube1,robot.tube2,robot.tube3,psiL,beta, 30);
     psibase = kinRet.psi(end,1:3);
     e = (psibase - alpha);
 end

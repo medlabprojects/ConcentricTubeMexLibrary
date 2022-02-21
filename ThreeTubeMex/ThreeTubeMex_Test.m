@@ -28,7 +28,7 @@ beta = [-100e-3,-60e-3,-25e-3];
 tic;
 time = 0;
 for i=1:1
-[R] = ThreeTubeMex(tube1, tube2, tube3, psiL, beta);
+[R] = ThreeTubeMex(tube1, tube2, tube3, psiL, beta, 50);
 time = time + toc;
 s_max = max(R.s);
 s_min = min(R.s);
@@ -39,7 +39,7 @@ daspect([1 1 1]);
 xlim([-25 25]*1e-3)
 ylim([-25 25]*1e-3)
 zlim([-50 50]*1e-3)
-view(az,el)
+% view(az,el)
 drawnow
 end
 toc;

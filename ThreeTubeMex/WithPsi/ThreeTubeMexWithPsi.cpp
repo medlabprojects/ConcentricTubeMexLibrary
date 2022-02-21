@@ -32,6 +32,7 @@ void printHelp()
                           "   Inputs:\n"
                           "      T1:   Tube structure for tube 1 (see definition below)\n"
                           "      T2:   Tube structure for tube 2 (see definition below)\n"
+                          "      T3:   Tube structure for tube 2 (see definition below)\n"
                           "      psiL: The distal tip angles\n"
                           "      Beta: The tube translations\n"
                           "      n:    (optional) number of sampled points\n"
@@ -81,17 +82,17 @@ bool checkConfig( const mxArray *config )
 
 bool checkArgs( int nrhs, const mxArray *prhs[] )
 {
-   if ( nrhs != 6 )
+   if ( nrhs < 5 || nrhs > 6 )
    {
       mexWarnMsgTxt( ERR_MSG_NOT_ENOUGH_ARGS );
       return false;
    }
    
-   //if ( !checkConfig( prhs[2] ) ) return false;
-  // if ( !checkConfig( prhs[3] ) ) return false;
-
-   //if ( !checkTube( prhs[0] ) ) return false;
-   //if ( !checkTube( prhs[1] ) ) return false;
+//    if ( !checkConfig( prhs[2] ) ) return false;
+//    if ( !checkConfig( prhs[3] ) ) return false;
+// 
+//    if ( !checkTube( prhs[0] ) ) return false;
+//    if ( !checkTube( prhs[1] ) ) return false;
 
    return true;
 }
@@ -253,8 +254,12 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
       CannulaT cannula = std::make_tuple( t1, t2, t3 );
       Configuration q = GetConfigFromInput( prhs[3], prhs[4] );
       
-
-      int n_normal_points = GetNNormalPoints( prhs[5] );
+      // optional input for variable number of points to sample
+      int n_normal_points = 20;
+      if (nrhs == 6) {
+        n_normal_points = GetNNormalPoints( prhs[5] );
+      }
+//       int n_normal_points = GetNNormalPoints( prhs[5] );
 
       KinRetDense<State<3,OType> > ret1 = Kinematics_with_dense_output( cannula, q, OType(), n_normal_points );
 

@@ -9,6 +9,7 @@ using namespace CTR::Functions;
 #define PROGRAM_NAME "ThreeTubeMex"
 
 const char * ERR_MSG_NOT_ENOUGH_ARGS = PROGRAM_NAME" did not receive the correct number of arguments";
+const char * ERR_MSG_WRONG_NUMBER_OF_POINTS = "The number of extra points must be greater than 0";
 
 struct Configuration
 {
@@ -26,8 +27,10 @@ void printHelp()
                           "   Inputs:\n"
                           "      T1:   Tube structure for tube 1 (see definition below)\n"
                           "      T2:   Tube structure for tube 2 (see definition below)\n"
+                          "      T3:   Tube structure for tube 2 (see definition below)\n"
                           "      psiL: The distal tip angles\n"
                           "      Beta: The tube translations\n"
+                          "      n:    (optional) number of points to sample along the arc length\n"
                           "   Outputs: \n"
                           "      p_tip: [3x1] tip position\n"
                           "      q_tip: [4x1] quaternion of tip orientation\n"
@@ -72,7 +75,7 @@ bool checkConfig( const mxArray *config )
 
 bool checkArgs( int nrhs, const mxArray *prhs[] )
 {
-   if ( nrhs != 5 )
+   if ( nrhs < 5 || nrhs > 6 )
    {
       mexWarnMsgTxt( ERR_MSG_NOT_ENOUGH_ARGS );
       return false;
@@ -122,6 +125,17 @@ Configuration GetConfigFromInput( const mxArray *psiL, const mxArray *Beta )
    return q;
 }
 
+int GetNNormalPoints( const mxArray *pNum )
+{
+    double *d = mxGetPr(pNum);
+    int n = static_cast<int>(*d);
+    if (n < 0) {
+        mexWarnMsgTxt( ERR_MSG_WRONG_NUMBER_OF_POINTS );
+        n = 0;
+    }
+    return n;
+}
+
 extern "C"
 void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
 {
@@ -144,15 +158,23 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
 
       CannulaT cannula = std::make_tuple( t1, t2, t3 );
       Configuration q = GetConfigFromInput( prhs[3], prhs[4] );
-
-      KinRetDense<State<3,OType> > ret1 = Kinematics_with_dense_output( cannula, q, OType() );
+      
+      // optional input for variable number of points to sample
+      int n_normal_points = 20;
+      if (nrhs == 6) {
+        n_normal_points = GetNNormalPoints( prhs[5] );
+      }
+      
+      KinRetDense<State<3,OType> > ret1 = Kinematics_with_dense_output( cannula, q, OType(), n_normal_points );
+      
       mxArray *p_tip = mxCreateDoubleMatrix( 3, 1, mxREAL );
       mxArray *q_tip = mxCreateDoubleMatrix( 4, 1, mxREAL );
       mxArray *J_tip = mxCreateDoubleMatrix( 6, 6, mxREAL );
+      
       int Npts = ret1.arc_length_points.size();
       mxArray *s =     mxCreateDoubleMatrix( Npts, 1, mxREAL );
       mxArray *p =     mxCreateDoubleMatrix( Npts, 3, mxREAL );
-      mxArray *qq =     mxCreateDoubleMatrix( Npts, 4, mxREAL );
+      mxArray *qq =    mxCreateDoubleMatrix( Npts, 4, mxREAL );
 
       double *pdata = mxGetPr( p_tip );
       double *qdata = mxGetPr( q_tip );

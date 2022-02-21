@@ -35,6 +35,7 @@ void printHelp()
                           "  Inputs:\n"
                           "      T1:   Tube structure for tube 1 (see definition below)\n"
                           "      T2:   Tube structure for tube 2 (see definition below)\n"
+                          "      T3:   Tube structure for tube 2 (see definition below)\n"
                           "      psiL: The distal tip angles\n"
                           "      Beta: The tube translations\n"
                           "      n:    number of sampled points\n"

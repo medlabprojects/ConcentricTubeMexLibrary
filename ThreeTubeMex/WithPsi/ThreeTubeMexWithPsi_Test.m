@@ -26,7 +26,7 @@ psiL = [.1,0,0];
 beta = [-100e-3,-60e-3,-25e-3];
 
 tic;
-[R] = ThreeTubeMexWithPsi(tube1, tube2, tube3, psiL, beta, 20);
+[R] = ThreeTubeMexWithPsi(tube1, tube2, tube3, psiL, beta, 50)
 t = toc;
 s_max = max(R.s);
 s_min = min(R.s);

@@ -1,6 +1,6 @@
 function [p_tip, s,pStar,qStar,Jh,JStar, kin] = fwkin_ThreeTube(robot,psiL,beta)
 
-    kin = ThreeTubeMexWithPsi(robot.tube1,robot.tube2,robot.tube3,psiL,beta);
+    kin = ThreeTubeMexWithPsi(robot.tube1,robot.tube2,robot.tube3,psiL,beta,20);
     
     % kinRet contains:
     % p_tip (3x1) - in base frame

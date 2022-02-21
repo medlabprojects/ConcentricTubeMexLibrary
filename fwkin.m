@@ -25,6 +25,12 @@ function [p_tip,s,p,q,Jh,J,kin] = fwkin(robot,q)
     nTubes = n/2;
     alphas = q(1:nTubes);
     betas = q(nTubes+1:end);
+
+    % flip if not row vector
+    if size(q,1)~= 1
+        alphas = alphas';
+        betas = betas';
+    end
     
     switch nTubes
         case 2
