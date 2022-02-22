@@ -20,7 +20,7 @@
 %       E:  Young's Modulus
 %       G:  Shear Modulus
 
-function [p_tip,s,p,q,Jh,J,kin] = fwkin(robot,q)
+function [p_tip,s,ps,qs,Jh,Js,kin] = fwkin(robot,q)
     n = length(q);
     nTubes = n/2;
     alphas = q(1:nTubes);
@@ -35,14 +35,76 @@ function [p_tip,s,p,q,Jh,J,kin] = fwkin(robot,q)
     switch nTubes
         case 2
             psis = find_psiTwoTube(robot, alphas, betas);
-            [p_tip,s,p,q,Jh,J,kin] = fwkin_TwoTube(robot, psis, betas);
+            kin = TwoTubeMexWithPsi(robot.tube1, robot.tube2, psis, betas);
         case 3
             psis = find_psiThreeTube(robot, alphas, betas);
-            [p_tip,s,p,q,Jh,J,kin] = fwkin_ThreeTube(robot, psis, betas);
+            kin = ThreeTubeMexWithPsi(robot.tube1, robot.tube2, robot.tube3, psis, betas);
         case 4
             psis = find_psiFourTube(robot, alphas, betas);
-            [p_tip,s,p,q,Jh,J,kin] = fwkin_FourTube(robot, psis, betas);
+            kin = FourTubeMexWithPsi(robot.tube1, robot.tube2, robot.tube3, robot.tube4, psis, betas);
         otherwise
             disp('wrong number of tubes')
+    end
+
+    s = kin.s;
+    pret = kin.p;  % in tip frame
+    qret = kin.q;  % in tip frame
+    p_tip = kin.p_tip;
+
+    N = length(s); % number of points returned from kinematics
+
+    % These are what we want to fill (in base frame):
+    ps = zeros(N,3);
+    qs = zeros(N,4);
+
+    % We'll use these to help fill out pStar and qStar values for each s:
+    g = zeros(4,4); g(4,4) = 1.0;
+
+    % Find the base frame s value:
+    [~,zeroIndex] = min(abs(s));
+    zeroIndex = zeroIndex(end); % in case more than one zero index is found
+
+    % Find the base frame transformation with respect to the tip frame
+    qZero = qret(zeroIndex,:);
+    pZero = pret(zeroIndex,:);
+    rot = quat2rotm(qZero);
+
+    gZero = [rot, pZero'; % in tip frame
+             0 0 0 1];
+
+    % The base frame wrt the base frame will be identity:
+    gStarZero = eye(4);
+
+    % The tip frame expressed in the base frame:
+    Rgstar = gStarZero(1:3,1:3);
+    Pgstar = gStarZero(1:3,4);
+    invg = [Rgstar' Rgstar'*Pgstar;
+            0 0 0 1];
+
+    gStarL = gStarZero*invg;
+    R_tip = quat2rotm(kin.q_tip');
+
+    % Run through the points and find them wrt base frame instead of tip:
+    for i = 1:N
+        g(1:3,1:3) = quat2rotm(qret(i,:));
+        g(1:3,4) = pret(i,:)';
+        gStar = robot.base*gStarL*g;
+
+        % Now pull p & q out of the transformation:
+        ps(i,:) = gStar(1:3,4)';
+        qs(i,:) = rotm2quat(gStar(1:3,1:3));
+    end
+
+    % Find the hybrid Jacobian for tip motion:
+    Jh = [R_tip zeros(3,3);
+          zeros(3,3) R_tip] * kin.J_tip;
+    kin.Jh = Jh;
+
+    % Find the hybrid Jacobian for each point along the backbone:
+    Js{N} = [];
+    qstar = 0;
+    for i = 1:N
+        Js{i} = [R_tip zeros(3,3);
+        zeros(3,3) R_tip]*kin.J{i};
     end
 end

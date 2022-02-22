@@ -9,7 +9,7 @@ function [p_tip, s,pStar,qStar,Jh,JStar, kin] = fwkin_ThreeTube(robot,psiL,beta)
     % s (Nx1)
     % p (Nx3)
     % q (Nx4)
-    % J (Nx1 cell containing 6x4 matrices)
+    % J (Nx1 cell containing 6x4 matrices
 
     s = kin.s;
     pret = kin.p;  % in tip frame
@@ -30,28 +30,35 @@ function [p_tip, s,pStar,qStar,Jh,JStar, kin] = fwkin_ThreeTube(robot,psiL,beta)
     zeroIndex = zeroIndex(end); % in case more than one zero index is found
 
     % Find the base frame transformation with respect to the tip frame
-%     qZero = qret(zeroIndex,:);
-%     pZero = pret(zeroIndex,:);
-%     gZero = assemble_transformation(pZero,qZero);  % in tip frame
+    qZero = qret(zeroIndex,:);
+    pZero = pret(zeroIndex,:);
+    rot = quat2rotm(qZero);
+
+    gZero = [rot, pZero'; % in tip frame
+             0 0 0 1];
 
     % The base frame wrt the base frame will be identity:
-%     gStarZero = eye(4);
+    gStarZero = eye(4);
 
     % The tip frame expressed in the base frame:
-%     gStarL = gStarZero*inverse_g(gZero);
+    Rgstar = gStarZero(1:3,1:3);
+    Pgstar = gStarZero(1:3,4);
+    invg = [Rgstar' Rgstar'*Pgstar;
+            0 0 0 1];
+
+    gStarL = gStarZero*invg;
     R_tip = quat2rotm(kin.q_tip');
 
     % Run through the points and find them wrt base frame instead of tip:
-%     for i = 1:N
-% 
-%         g(1:3,1:3) = quat2rotm(qret(i,:));
-%         g(1:3,4) = pret(i,:)';
-%         gStar = robot.base*gStarL*g;
-% 
-%         % Now pull p & q out of the transformation:
-%         pStar(i,:) = gStar(1:3,4)';
-%         qStar(i,:) = rotm2quat(gStar(1:3,1:3));
-%     end
+    for i = 1:N
+        g(1:3,1:3) = quat2rotm(qret(i,:));
+        g(1:3,4) = pret(i,:)';
+        gStar = robot.base*gStarL*g;
+
+        % Now pull p & q out of the transformation:
+        pStar(i,:) = gStar(1:3,4)';
+        qStar(i,:) = rotm2quat(gStar(1:3,1:3));
+    end
 
     % Find the hybrid Jacobian for tip motion:
     Jh = [R_tip zeros(3,3);
@@ -60,9 +67,19 @@ function [p_tip, s,pStar,qStar,Jh,JStar, kin] = fwkin_ThreeTube(robot,psiL,beta)
     % Find the hybrid Jacobian for each point along the backbone:
     JStar{N} = [];
     qstar = 0;
-%     for i = 1:N
-%         JStar{i} = [R_tip zeros(3,3);
-%         zeros(3,3) R_tip]*kinRet.J_n{i};
-%     end
+    for i = 1:N
+        JStar{i} = [R_tip zeros(3,3);
+        zeros(3,3) R_tip]*kin.J{i};
+    end
 
 end
+
+
+
+
+
+
+
+
+
+
