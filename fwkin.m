@@ -3,14 +3,14 @@
 %   robot: struct containing the n tube structs
 %   q: array consisting of values [base rotation, base translation], where
 %       rotation alpha or psi [1xn] and translation is beta [1xn]
-%   optional
 % OUTPUTS
-%   p_tip:
-%   q_tip:
-%   s:
-%   p:
-%   Jh:
-%   J:
+%   p_tip: [3x1]   position of tip in base frame
+%   s:     [nx1]   arc length positions of sampled points
+%   ps:    [3xn]   positions of backbone points at position s in base frame
+%   qs:    [4xn]   quaternions of backbone points at position s in base frame
+%   Jh:    [6x6]   Jacobian at tip
+%   Js:    {6x6xn} Jacobian at backbone points
+%   kin:           raw struct output of kinematics
 % TubeN: Struct defining tube parameters with following elements
 %       OD: Outer diameter
 %       ID: Inner diameter
