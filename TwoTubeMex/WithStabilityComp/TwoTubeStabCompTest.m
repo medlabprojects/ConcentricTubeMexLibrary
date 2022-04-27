@@ -18,4 +18,4 @@ tube2.G = tube2.E/2/(1.4);
 alpha = [0 0];
 beta = [-1e-3 -1e-3];
 
-[kin] = TwoTubeMexWithStabilityComp(tube1, tube2, alpha, beta)
+[kin] = TwoTubeMexWithStabilityComp(tube1, tube2, alpha, beta, 30)

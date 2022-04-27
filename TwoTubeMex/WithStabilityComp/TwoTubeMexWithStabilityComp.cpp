@@ -45,6 +45,7 @@ void printHelp()
                           "      p:     [nx3] positions of sampled points\n"
                           "      q:     [nx4] quaternion orientation of sampled points\n"
                           "      J:     [nx1 cells] jacobian of sampled points\n"
+                          "      psi:   [nx3] psi (rotations) of sampled points\n"
                           "      stability:  [double] stability at tip\n"
                           "      C_tip: [6x6] compliance matrix at tip\n"
                           "\n"
@@ -150,6 +151,7 @@ void copy_outputs_to_matlab( KinRetDense<State<2,OType> > const &ret1, mxArray *
 	mxArray *s =     mxCreateDoubleMatrix( Npts, 1, mxREAL );
 	mxArray *p =     mxCreateDoubleMatrix( Npts, 3, mxREAL );
 	mxArray *qq =    mxCreateDoubleMatrix( Npts, 4, mxREAL );
+    mxArray *psi =   mxCreateDoubleMatrix( Npts, 3, mxREAL );
     mxArray *stability = mxCreateDoubleMatrix( 1, 1, mxREAL );
 
 	double *pdata = mxGetPr( p_tip );
@@ -159,6 +161,7 @@ void copy_outputs_to_matlab( KinRetDense<State<2,OType> > const &ret1, mxArray *
 	double *sdata = mxGetPr( s );
 	double *pdensedata = mxGetPr( p );
 	double *qdensedata = mxGetPr( qq );
+	double *psidensedata=mxGetPr( psi );
     double *stabilityData = mxGetPr( stability );
 
 	std::copy( ret1.pTip.data(), ret1.pTip.data() + 3, pdata );
@@ -182,7 +185,11 @@ void copy_outputs_to_matlab( KinRetDense<State<2,OType> > const &ret1, mxArray *
 	{
 		Eigen::Vector3d const &pi = ret1.dense_state_output.at( i ).p;
 		Eigen::Vector4d const &qi = ret1.dense_state_output.at( i ).q;
-		
+		Eigen::VectorXd const &psI = ret1.dense_state_output.at( i ).Psi;
+
+		*(psidensedata + i)			   = psI[0];
+		*(psidensedata + i + Npts)	   = psI[1];
+		*(psidensedata + i + 2 * Npts) = psI[2];
 		transformation g_star = g_base * transformation(pi,qi);
 	
 		*(pdensedata + i) = g_star.p[0];
@@ -201,6 +208,7 @@ void copy_outputs_to_matlab( KinRetDense<State<2,OType> > const &ret1, mxArray *
 	mxSetField( plhs[0], 0, "s", s );
 	mxSetField( plhs[0], 0, "p", p );
 	mxSetField( plhs[0], 0, "q", qq );
+	mxSetField( plhs[0], 0, "psi", psi);
     mxSetField( plhs[0], 0, "C_tip", C_tip );
     mxSetField( plhs[0], 0, "stability", stability);
 
@@ -250,9 +258,9 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
  
    if ( nlhs == 1 )
    {
-      const char *fields[] = { "p_tip", "q_tip", "J_tip" ,"s", "p", "q", "J", "C_tip", "stability"};
+      const char *fields[] = { "p_tip", "q_tip", "J_tip" ,"s", "p", "q", "J", "psi", "C_tip", "stability"};
       size_t dims[1] = { 1 };
-      plhs[0] = mxCreateStructArray( 1, dims, 9, fields );
+      plhs[0] = mxCreateStructArray( 1, dims, 10, fields );
 
       using namespace CTR;
       Tube<CurvFun> t1 = GetTubeFromInput( prhs[0] );
