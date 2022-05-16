@@ -23,7 +23,7 @@ struct Configuration
 {
    Eigen::Vector4d	PsiL;
    Eigen::Vector4d	Beta;
-   Eigen::Vector3d      Ftip;
+   Eigen::Vector3d  Ftip;
    Eigen::Vector3d	Ttip;
 };
 
