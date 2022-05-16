@@ -11,6 +11,8 @@ AtS (e.g. ThreeTubeAtS) something where arclength is evaluated at specified poin
 With Psi (e.g. ThreeTubeWithPsi) takes into account torsion that would occur along the straight sections of the tubes. 
 Each folder has a test file that gives a simple robot configuration and plots to test if the mex built correctly. 
 
+With Stability and Compliance (e.g. ThreeTubeWithStabilityComp) contains the stability and the tip and the 6x6 compliance matrix at 
+tip, as well as the psi values to account for torsion. 
 
 ### Note: this is code written by Hunter years ago, found on Margaret's network drive, then adapted and uploaded by Jesse to this repo
 Some things might need tweaking later down the line but the main cpp functions are not changed. 
@@ -53,9 +55,17 @@ J     [Nx1] - cell containing 6x4 jacobians
 n (optional)- number of sampled points
 ```
 
-Note: WithPsi will also contain the field
+Note: 
+
+WithPsi will also contain the field
 ```
 psi [Nx3]   - psi values at each link
+```
+
+WithStabilityComp will also contain the fields
+```
+stability [double]     - stability measure at the tip
+C_tip [6x6]            - compliance matrix at the tip
 ```
 
 
