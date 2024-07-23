@@ -61,6 +61,6 @@ daspect([1 1 1]);
 xlim([-25 25]*1e-3)
 ylim([-25 25]*1e-3)
 zlim([-50 50]*1e-3)
-view(az,el)
+% view(az,el)
 drawnow
 

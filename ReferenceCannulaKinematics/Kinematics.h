@@ -965,6 +965,7 @@ namespace CTR
       Eigen::Matrix<double, 6, 2 * N > J;
       J = -Ad*y.Zga;
       J( 2, N ) += 1; //arc-length attach
+      J( 5, 0 ) += 1; //beta base rotation
       return J;
    }
 

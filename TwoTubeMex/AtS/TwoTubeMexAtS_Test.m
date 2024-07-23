@@ -23,7 +23,8 @@ tube2.G = tube2.E/2/(1.4);
 beta = [-100e-3,-60e-3];
 % [az,el]=view
 time = 0;
-for i=1:1
+figure
+for i=1:50
 psiL = [2*pi*i/100,6*pi*i/100];
 tic;
 [R] = TwoTubeMexAtS(tube1, tube2, psiL, beta, 0, .011111111111);
@@ -38,6 +39,7 @@ xlim([-25 25]*1e-3)
 ylim([-25 25]*1e-3)
 zlim([-50 50]*1e-3)
 % view(az,el)
+grid on;
 drawnow
 end
 
