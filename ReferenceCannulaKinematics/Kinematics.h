@@ -961,11 +961,19 @@ namespace CTR
       GetTipJacobianForTube1( const State &y )
    {
       const int N = internal::traits<State>::N::value;
-      Eigen::Matrix<double, 6, 6> Ad = Utility::Adjoint_p_q( y.p, y.q );
+      Eigen::Matrix<double, 6, 6> Ad = Utility::Adjoint_p_q( y.p, y.q ); // y.p and y.q are in world frame
       Eigen::Matrix<double, 6, 2 * N > J;
-      J = -Ad*y.Zga;
+//       J = y.Zga;
+
+      // From MLS p. 61  V^b_ab = -Ad[g_ab] * V^b_ba
+      // so here we basically still use the body jacobian but transform it to point from a to b instead of b to a
+      // ex: if im in a car driving past a house, V^b_ba is looking at the house and seeing it move in my negative z, 
+      //     whereas V^b_ab is still in my reference frame but how the house sees be going in my positive z
+      J = -Ad*y.Zga; // Adj = Ad[T_body_final (spatial)]
+
+      // still no clue here
       J( 2, N ) += 1; //arc-length attach
-      J( 5, 0 ) += 1; //beta base rotation
+      J( 5, 0 ) += 1; //alpha base rotation
       return J;
    }
 

@@ -2,10 +2,10 @@
 tube1.OD = 1.0e-3;
 tube1.ID = 0.6e-3;
 tube1.k1 = 25;
-tube1.k2 = 60;
-tube1.L = 150e-3;
-tube1.Lc_transition = 25e-3;
-tube1.Lt = 100e-3;
+tube1.k2 = 0;
+tube1.L = 200e-3;
+tube1.Lc_transition = 175e-3;
+tube1.Lt = 150e-3;
 tube1.E = 50e9;
 tube1.G = tube1.E/2/(1.4);
 
@@ -20,11 +20,11 @@ tube2.E = 50e9;
 tube2.G = tube2.E/2/(1.4);
 
 
-beta = [-100e-3,-60e-3];
+beta = [-150e-3,-99e-3];
 [az,el]=view
 time = 0;
 figure;
-for i=1:50
+for i=1:1
 psiL = [2*pi*i/100,6*pi*i/100]
 tic;
 [R] = TwoTubeMexWithMultiCurve(tube1, tube2, psiL, beta, 20);

@@ -37,13 +37,13 @@ void printHelp()
                           "      Beta: The tube translations\n"
                           "      n:    (optional) number of sampled points\n"
                           "   Outputs: \n"
-                          "      p_tip: [3x1] tip position\n"
-                          "      q_tip: [4x1] quaternion of tip orientation\n"
-                          "      J_tip: [6x4] Jacobian matrix of p_tip and q_tip with respect to psiL and Beta\n"
+                          "      p_tip: [3x1] tip position in base frame\n"
+                          "      q_tip: [4x1] quaternion of tip orientation in base frame\n"
+                          "      J_tip: [6x4] Jacobian matrix of p_tip and q_tip with respect to psiL and Beta in base frame\n"
                           "      s:     [nx1] arclengths of sampled points\n"
-                          "      p:     [nx3] positions of sampled points\n"
-                          "      q:     [nx4] quaternion orientation of sampled points\n"
-                          "      J:     [nx1 cells] jacobian of sampled points\n"
+                          "      p:     [nx3] positions of sampled points in tip frame\n"
+                          "      q:     [nx4] quaternion orientation of sampled points in tip frame\n"
+                          "      J:     [nx1 cells] jacobian of sampled points in tip frame\n"
                           "      psi:   [nx3] psi (rotations) of sampled points\n"
                           "\n"
                           "   Tube structure definition: \n"
@@ -52,7 +52,7 @@ void printHelp()
                           "      k1: Tube first precurvature (scalar)\n"
                           "      k2: Tube second precurvature (scalar)\n"
                           "      L:  Total tube length\n"
-                          "      Lc_transition: Transition point between curvatures\n"
+                          "      Lc_transition: Transition point between curvatures- beginning at base (Lt) \n"
                           "      Lt: Transmission length\n"
                           "      E:  Young's Modulus\n"
                           "      G:  Shear Modulus\n";
@@ -124,7 +124,7 @@ Tube<CurvFun> GetTubeFromInput(const mxArray *tube)
    mxArray *k2 = mxGetField( tube, 0, "k2" );
    k2val = *mxGetPr( k2 );
 
-   CurvFun kfun( k1val*Eigen::Vector2d::UnitX(), k2val*Eigen::Vector2d::UnitX(), Lc_transition_val, Lc_transition_val/10 );
+   CurvFun kfun( k1val*Eigen::Vector2d::UnitX(), k2val*Eigen::Vector2d::UnitX(), Lc_transition_val, 2.0e-3);
 
 
    return make_annular_tube( Lval, Ltval, ODval, IDval, kfun, Eval, Gval );

@@ -96,9 +96,11 @@ function [p_tip,s,ps,qs,Jh,Js,kin] = fwkin(robot,q)
     end
 
     % Find the hybrid Jacobian for tip motion:
-    Jh = [R_tip zeros(3,3);
-          zeros(3,3) R_tip] * kin.J_tip;
-    kin.Jh = Jh;
+    Adj = [R_tip zeros(3,3);
+          zeros(3,3) R_tip];
+    Jh = Adj * kin.J_tip;
+%     kin.Jh = Jh;
+    kin.Jh = kin.J_tip;
 
     % Find the hybrid Jacobian for each point along the backbone:
     Js{N} = [];
